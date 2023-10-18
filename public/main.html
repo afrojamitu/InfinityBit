@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+    <style>
+        body {
+            background-color: rgb(86, 42, 110);
+            text-align: center;
+            color: white;
+            padding: 100px 0;
+        }
+
+        p{
+            padding-bottom: 20px;
+            font-size: 20px;
+        }
+
+        a {
+            font-size: 18px;
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome Back!</h1>
+    <p id="login-status"></p>
+    <a href="/logout">Logout</a>
+
+
+    <script>
+        fetch('/login-status')
+      .then(response => response.json())
+      .then(data => {
+        const isLoggedIn = data.isLoggedIn;
+
+        const loginStatusElement = document.getElementById('login-status');
+        if (isLoggedIn) {
+          loginStatusElement.textContent = 'You are logged in.';
+        } else {
+          loginStatusElement.textContent = 'You are not logged in.';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching login status:', error);
+      });
+
+    </script>
+</body>
+
+</html>
